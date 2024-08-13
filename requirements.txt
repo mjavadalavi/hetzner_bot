@@ -1,0 +1,6 @@
+python-telegram-bot
+SQLAlchemy
+python-dotenv
+requests
+celery
+redis
