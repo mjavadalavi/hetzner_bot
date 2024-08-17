@@ -1,7 +1,8 @@
-from telegram import Update
 from telegram.ext import CommandHandler, CallbackContext
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from database.models import User
 from database.db_session import SessionLocal
+
 
 def start(update: Update, context: CallbackContext):
     session = SessionLocal()
@@ -17,11 +18,19 @@ def start(update: Update, context: CallbackContext):
         )
         session.add(user)
         session.commit()
-        update.message.reply_text(f"Welcome, {user.first_name}!")
-    else:
-        update.message.reply_text(f"Welcome back, {user.first_name}!")
+
+    # Send welcome message
+    reply_markup = InlineKeyboardMarkup([
+        [InlineKeyboardButton("My Servers", callback_data='my_servers')],
+        [InlineKeyboardButton("Buy Server", callback_data='buy_server')],
+        [InlineKeyboardButton("Profile", callback_data='profile')]
+    ])
+    update.message.reply_text(
+        f"Welcome {user.username}!\nTotal Expenses: {user.total_expenses}\nBalance: {user.balance}",
+        reply_markup=reply_markup)
 
     session.close()
+
 
 def setup_dispatcher(dp):
     dp.add_handler(CommandHandler("start", start))

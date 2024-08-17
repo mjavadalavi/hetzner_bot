@@ -1,5 +1,8 @@
 from telegram.ext import Updater
+
+import config
 from handlers import start, servers
+
 
 def main():
     updater = Updater(token=config.TELEGRAM_TOKEN, use_context=True)
@@ -10,6 +13,7 @@ def main():
 
     updater.start_polling()
     updater.idle()
+
 
 if __name__ == '__main__':
     main()

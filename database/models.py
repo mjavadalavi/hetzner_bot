@@ -5,6 +5,7 @@ from datetime import datetime
 
 Base = declarative_base()
 
+
 class User(Base):
     __tablename__ = 'users'
 
@@ -17,6 +18,7 @@ class User(Base):
     servers = relationship('Server', back_populates='owner')
     transactions = relationship('Transaction', back_populates='user')
 
+
 class Server(Base):
     __tablename__ = 'servers'
 
@@ -25,9 +27,11 @@ class Server(Base):
     user_id = Column(Integer, ForeignKey('users.id'))
     server_type = Column(String(50))
     country = Column(String(50))
+    os = Column(String)
     cost_per_hour = Column(Float)
     created_at = Column(DateTime, default=datetime.utcnow)
     owner = relationship('User', back_populates='servers')
+
 
 class Transaction(Base):
     __tablename__ = 'transactions'
