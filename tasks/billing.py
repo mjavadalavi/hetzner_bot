@@ -1,5 +1,5 @@
 from tasks.celery import celery_app
-from database.db_session import SessionLocal
+from database.db_utils import SessionLocal
 from database.models import User
 from config import PROFIT_MARGIN
 

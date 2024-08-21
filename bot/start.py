@@ -1,7 +1,7 @@
 from telegram.ext import CommandHandler, CallbackContext
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from database.models import User
-from database.db_session import SessionLocal
+from database.db_utils import SessionLocal
 
 
 def start(update: Update, context: CallbackContext):
